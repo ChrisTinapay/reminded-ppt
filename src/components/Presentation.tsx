@@ -127,10 +127,19 @@ const slides = [
     icon: GraduationCap,
     content: [
       { type: "point", label: "Research Design", value: "Quantitative (Developmental, Experimental, & Descriptive-Evaluative)." },
+      { type: "timeline", items: ["Developmental", "Experimental", "Descriptive-Evaluative"] },
       { type: "grid", items: [
-          { label: "Developmental", value: "Scrum Methodology" },
-          { label: "Sampling", value: "Stratified Random Sampling" },
-          { label: "Respondents", value: "1st & 2nd Year CS & Education students (OLOPSC)" }
+  
+          { label: "Sampling Technique", value: "Stratified Random Sampling" },
+          { label: "Research Instruments", value: "• Survey (ISO 25010, TAM, WCAG 2.1 AA)\n• Knowledge Tests (Pre-test & Post-test)" },
+        ]
+      },
+      { type: "sub-header", value: "Data Gathering Procedure" },
+      { type: "process-timeline", items: [
+          { title: "Pre-test", description: "Before using the system." },
+          { title: "System Usage", description: "Respondents interact with RemindED." },
+          { title: "Post-test", description: "After using the system." },
+          { title: "Treatment of Data", description: "The collected data will be encoded and organized for analysis." }
         ]
       },
       { type: "sub-header", value: "Ethics & Privacy:" },
@@ -140,13 +149,7 @@ const slides = [
           "Informed consent forms required; Voluntary participation."
         ]
       },
-      { type: "sub-header", value: "Instruments & Procedure:" },
-      { type: "list", items: [
-          "Instrument 1: Survey (ISO 25010, TAM, WCAG 2.1 AA).",
-          "Instrument 2: Knowledge Tests (Pre-test & Post-test).",
-          "Procedure: Request Letter → Pre-test → System Use → Post-test."
-        ]
-      }
+      
     ],
     section: "Methodology"
   },
@@ -428,7 +431,7 @@ function ContentItem({ item, index }: { item: any; index: number }) {
         {item.items.map((subItem: any, subIdx: number) => (
           <div key={subIdx} className="bg-slate-900 p-8 rounded-xl border border-slate-800">
             <h3 className="text-indigo-400 font-bold mb-3 text-2xl">{subItem.label}</h3>
-            <p className="text-slate-300 text-xl">{subItem.value}</p>
+            <p className="text-slate-300 text-xl whitespace-pre-line">{subItem.value}</p>
           </div>
         ))}
       </motion.div>
@@ -578,6 +581,66 @@ function ContentItem({ item, index }: { item: any; index: number }) {
 
   if (item.type === "sm2-diagram") {
     return <SM2Diagram />;
+  }
+
+  if (item.type === "timeline") {
+    return (
+        <div className="relative mt-8">
+            {/* Connecting Line */}
+            <motion.div 
+                className="absolute top-6 left-[10%] w-[80%] h-1 bg-slate-700"
+                initial={{ scaleX: 0, originX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 1.5, delay: 0.5, ease: "easeInOut" }}
+            />
+            
+            <div className="flex justify-between relative z-10">
+                {item.items.map((phase: string, idx: number) => (
+                    <motion.div 
+                        key={idx}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 + idx * 0.4 }}
+                        className="flex flex-col items-center"
+                    >
+                        <div className="w-12 h-12 rounded-full bg-indigo-600 border-4 border-slate-900 flex items-center justify-center text-white font-bold mb-4 shadow-lg shadow-indigo-900/50">
+                            {idx + 1}
+                        </div>
+                        <div className="text-xl text-slate-300 font-medium text-center w-32">
+                            {phase}
+                        </div>
+                    </motion.div>
+                ))}
+            </div>
+        </div>
+    );
+  }
+
+  if (item.type === "process-timeline") {
+    return (
+      <div className="relative mt-12 mb-12">
+        <div className="absolute left-6 top-6 bottom-6 w-0.5 bg-slate-700" />
+        <div className="space-y-12">
+            {item.items.map((process: any, idx: number) => (
+                <motion.div 
+                    key={idx}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.3 }}
+                    className="relative pl-16"
+                >
+                    <div className="absolute left-0 top-1 w-12 h-12 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center shadow-lg z-10">
+                        <div className="w-4 h-4 rounded-full bg-indigo-500" />
+                    </div>
+                    <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-800 hover:border-indigo-500/30 transition-colors">
+                        <h4 className="text-indigo-400 font-bold text-2xl mb-2">{process.title}</h4>
+                        <p className="text-slate-300 text-xl">{process.description}</p>
+                    </div>
+                </motion.div>
+            ))}
+        </div>
+      </div>
+    );
   }
 
   return null;
