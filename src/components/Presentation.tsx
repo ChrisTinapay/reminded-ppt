@@ -15,30 +15,15 @@ import {
   GraduationCap,
   Bell,
   MessageCircle,
-  Heart
+  Heart,
+  Search,
+  Hourglass,
+  RotateCcw
 } from "lucide-react";
 
 // --- Data ---
 
 const slides = [
-  {
-    id: "notification-hook-1",
-    title: "",
-    subtitle: "",
-    icon: MessageCircle,
-    content: [
-      { 
-        type: "notification", 
-        app: "Messages",
-        title: "New Notification", 
-        message: "❤️",
-        time: "Now",
-        icon: Heart,
-        color: "bg-indigo-500"
-      }
-    ],
-    section: "Hook 1"
-  },
   {
     id: "notification-hook-2",
     title: "",
@@ -58,24 +43,45 @@ const slides = [
     section: "Hook 2"
   },
   {
-    id: "intro",
-    title: "RemindED",
-    subtitle: "AI-Powered Spaced Repetition for Enhanced Retention",
-    icon: Brain,
+    id: "decay",
+    title: "The Reality of Retention",
+    icon: Hourglass,
     content: [
-      { type: "text", value: "Revolutionizing study habits with adaptive learning technology." },
-      { type: "highlight", value: "Presentation for Defense" }
+        {
+            type: "hourglass-demo",
+            title: "Knowledge Decay",
+            description: "Without reinforcement, knowledge fades rapidly over time, just like sand slipping away."
+        }
     ],
-    section: "Intro"
+    section: "Decay"
   },
   {
     id: "problem",
-    title: "1. The Problem",
+    title: "The Problem",
     icon: Lightbulb,
     content: [
-      { type: "point", label: "Core Issue", value: "Students forget 90% of new info within a week (Ebbinghaus Forgetting Curve)." },
-      { type: "point", label: "Current Habits", value: "Passive learning (cramming/re-reading) is ineffective." },
-      { type: "point", label: "Gap", value: "Lack of personalized, adaptive tools that automate review scheduling." }
+      {
+        type: "web-search",
+        query: "why do students forget so much?",
+        results: [
+            {
+                url: "Research Paper › Chapter 1 › Problem",
+                title: "The Forgetting Curve: Why We Lose 90% of Information",
+                snippet: "Core Issue: Research confirms that students forget 90% of new info within a week (Ebbinghaus Forgetting Curve). This natural memory decay is the primary barrier to long-term retention.",
+                link: "https://docs.google.com/document/d/1htE4dMxS90M-K8h0B6eu9Sh4RhJScEGHewqKgGZWYpE/edit?tab=t.0#bookmark=id.bbvh1iadhab"
+            },
+            {
+                url: "Research Paper › Chapter 1 › Background",
+                title: " The Flaws of Passive Learning",
+                snippet: "the act of retrieving information from memory strengthens neural pathways more effectively than passive review. This mechanism, known as Active Recall, shifts the student’s role from a passive consumer of information to an active participant.",
+                link: "https://docs.google.com/document/d/1htE4dMxS90M-K8h0B6eu9Sh4RhJScEGHewqKgGZWYpE/edit?tab=t.0#bookmark=id.ppyouwb829xn"
+            }
+        ],
+        related: [
+            "How to improve memory retention in students",
+            "Active recall vs passive review"
+        ]
+      }
     ],
     section: "Problem"
   },
@@ -84,39 +90,26 @@ const slides = [
     title: "Statement of the Problem",
     icon: Lightbulb,
     content: [
-      { type: "point", label: "1. Development", value: "How can a spaced repetition system supported by AI be developed to support students in improving their knowledge retention?" },
-      { type: "point", label: "2. Features", value: "What features in the system are needed to support students?" },
-      { type: "point", label: "3. Effectiveness", value: "Effectiveness of the system in knowledge retention based on students’ feedback and performance metrics, particularly in terms of:" },
-      { type: "list", items: [
-          "3.1. Ease of Use",
-          "3.2. Ease of Learning",
-          "3.3. Perceived Usefulness",
-          "3.4. Knowledge Retention"
-        ] 
+      { type: "text", value: "Focus: Design, Development, & Evaluation of RemindED" },
+      { type: "grid", items: [
+          { label: "1. Integration", value: "How can AI & SM-2 optimize scheduling and assessment generation?" },
+          { label: "2. Effectiveness", value: "Is there a significant difference in retention scores (Pre vs. Post)?" },
+          { label: "3. Evaluation", value: "Assessing Functional Suitability, Performance, Usability, & Retention." }
+        ]
       }
     ],
     section: "SOP"
   },
   {
     id: "solution",
-    title: "2. The Solution (RemindED)",
+    title: "RemindED: An AI-Powered Spaced Repetition Algorithm System for Enhanced Knowledge Retention",
     icon: Target,
-    content: [
-      { type: "text", value: "A web application using AI and Spaced Repetition." },
-      { type: "sub-header", value: "How it works:" },
-      { type: "list", items: [
-          "Teacher uploads PDF syllabus/notes.",
-          "AI (Gemini API) generates multi-level questions based on Bloom's Taxonomy.",
-          "System schedules reviews using the SM-2 Algorithm based on user performance."
-        ] 
-      },
-      { type: "point", label: "Target Users", value: "1st & 2nd Year BSCS and Education students at OLOPSC." }
-    ],
+    content: [],
     section: "Solution"
   },
   {
     id: "framework",
-    title: "3. Theoretical Framework",
+    title: "Theoretical Framework",
     icon: BookOpen,
     content: [
       { type: "point", label: "Ebbinghaus Forgetting Curve & Spacing Effect", value: "Justifies when to review." },
@@ -127,26 +120,8 @@ const slides = [
     section: "Framework"
   },
   {
-    id: "objectives",
-    title: "4. Objectives",
-    icon: Layers,
-    content: [
-      { type: "point", label: "General", value: "Develop and evaluate RemindED." },
-      { type: "sub-header", value: "Specific Objectives:" },
-      { type: "list", items: [
-          "Design/Develop the RemindED web application.",
-          "Implement AI for Bloom's-based quiz generation.",
-          "Implement a modified SM-2 algorithm.",
-          "Evaluate impact on Knowledge Retention.",
-          "Assess via ISO 25010 and WCAG 2.1 AA."
-        ]
-      }
-    ],
-    section: "Objectives"
-  },
-  {
     id: "methodology",
-    title: "5. Methodology",
+    title: "Methodology",
     icon: GraduationCap,
     content: [
       { type: "point", label: "Research Design", value: "Quantitative (Developmental, Experimental, & Descriptive-Evaluative)." },
@@ -175,7 +150,7 @@ const slides = [
   },
   {
     id: "stack",
-    title: "6. Technical Stack",
+    title: "Technical Stack",
     icon: Code,
     content: [
       { type: "grid", items: [
@@ -190,7 +165,7 @@ const slides = [
   },
   {
     id: "stats",
-    title: "7. Key Statistics",
+    title: "Key Statistics",
     icon: BarChart3,
     content: [
       { type: "quote", value: "\"86% of educational organizations now use generative AI\"", author: "Microsoft, 2025" },
@@ -299,7 +274,7 @@ export default function Presentation() {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: direction * -100, scale: 0.95 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="w-full max-w-5xl"
+            className="w-full max-w-6xl"
           >
             {slides[currentSlide].title && (
               <div className="mb-8 flex items-center gap-4">
@@ -522,6 +497,247 @@ function ContentItem({ item, index }: { item: any; index: number }) {
     );
   }
 
+  if (item.type === "web-search") {
+    return (
+      <motion.div
+        custom={index}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-6xl mx-auto bg-slate-900 rounded-xl overflow-hidden border border-slate-700 shadow-2xl font-sans"
+      >
+        {/* Browser Header */}
+        <div className="bg-slate-800 p-6 border-b border-slate-700 flex items-center gap-6">
+            <div className="flex gap-3">
+                <div className="w-4 h-4 rounded-full bg-red-500"/>
+                <div className="w-4 h-4 rounded-full bg-yellow-500"/>
+                <div className="w-4 h-4 rounded-full bg-green-500"/>
+            </div>
+            <div className="flex-1 bg-slate-900 rounded-full px-6 py-3 flex items-center gap-3 text-slate-400 text-lg">
+                <Search className="w-5 h-5" />
+                <TypewriterText text={item.query} />
+            </div>
+        </div>
+
+        {/* Search Results Body */}
+        <div className="p-10 space-y-10">
+            {/* Main Results */}
+            {item.results.map((result: any, idx: number) => (
+                <div key={idx}>
+                    <div className="flex items-center gap-3 text-slate-400 text-base mb-2">
+                        <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center">
+                            <Brain className="w-4 h-4" />
+                        </div>
+                        <span>{result.url}</span>
+                    </div>
+                    <a 
+                        href={result.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-blue-400 text-3xl hover:underline cursor-pointer font-medium mb-3 block"
+                    >
+                        {result.title}
+                    </a>
+                    <p className="text-slate-300 text-xl leading-relaxed">
+                        {result.snippet}
+                    </p>
+                </div>
+            ))}
+
+            {/* Related Searches */}
+            <div>
+                <h4 className="text-slate-200 text-2xl font-medium mb-6">Related searches</h4>
+                <div className="space-y-4">
+                    {item.related.map((term: string, idx: number) => (
+                        <div key={idx} className="flex items-center gap-4 p-4 hover:bg-slate-800 rounded-lg cursor-pointer group transition-colors">
+                            <Search className="w-6 h-6 text-slate-500 group-hover:text-indigo-400" />
+                            <span className="text-indigo-300 text-xl">{term}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+      </motion.div>
+    );
+  }
+
+  if (item.type === "hourglass-demo") {
+      return (
+          <HourglassDemo item={item} index={index} />
+      );
+  }
+
   return null;
 }
 
+function TypewriterText({ text }: { text: string }) {
+  const [displayedText, setDisplayedText] = useState("");
+
+  useEffect(() => {
+    setDisplayedText("");
+    let index = 0;
+    // Ensure we start with empty string and increment up to full length
+    const interval = setInterval(() => {
+      if (index <= text.length) {
+          setDisplayedText(text.slice(0, index));
+          index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 120); 
+
+    return () => clearInterval(interval);
+  }, [text]);
+
+  return (
+    <span className="flex items-center">
+      {displayedText}
+      <motion.span 
+        animate={{ opacity: [1, 0, 1] }}
+        transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+        className="ml-1 w-[2px] h-5 bg-indigo-400 inline-block align-middle"
+      />
+    </span>
+  );
+}
+
+function HourglassDemo({ item, index }: { item: any, index: number }) {
+    const [rotation, setRotation] = useState(0);
+    const [isFlowing, setIsFlowing] = useState(true);
+
+    const handleFlip = () => {
+        setRotation(prev => prev + 180);
+        setIsFlowing(false); // Reset flow
+        setTimeout(() => setIsFlowing(true), 100); // Start flow slightly after flip starts
+    };
+
+    // Determine which bulb is currently "top" based on rotation
+    // Even rotation (0, 360) -> Bulb A is Top
+    // Odd rotation (180, 540) -> Bulb B is Top
+    const isBulbATop = (rotation / 180) % 2 === 0;
+
+    return (
+        <div className="flex flex-col items-center justify-center py-8">
+            <p className="text-2xl text-slate-300 mb-12 text-center max-w-3xl">
+                {item.description}
+            </p>
+
+            <div className="relative mb-12">
+                {/* Hourglass Container */}
+                <motion.div
+                    animate={{ rotate: rotation }}
+                    transition={{ duration: 0.8, type: "spring", stiffness: 60 }}
+                    className="relative w-64 h-80 flex flex-col items-center justify-center"
+                >
+                     {/* SVG Frame for Shape & Border */}
+                     <svg className="absolute inset-0 w-full h-full z-20 pointer-events-none drop-shadow-2xl" viewBox="0 0 200 300">
+                        <defs>
+                             <linearGradient id="glass-shine" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stopColor="rgba(255,255,255,0.1)" />
+                                <stop offset="50%" stopColor="rgba(255,255,255,0)" />
+                                <stop offset="100%" stopColor="rgba(255,255,255,0.05)" />
+                            </linearGradient>
+                        </defs>
+                        
+                        {/* Outline Path */}
+                        <path 
+                         d="M -10 10 L 210 10 L 105 148 L 105 152 L 210 290 L -10 290 L 95 152 L 95 148 Z" 
+                         fill="url(#glass-shine)" 
+                         stroke="#475569" 
+                         strokeWidth="6"
+                         strokeLinejoin="round"
+                         className="drop-shadow-lg"
+                        />
+                    </svg>
+
+                     {/* Sand Container - Masked by CSS Clip Path to match SVG */}
+                     {/* 
+                        Coordinates Mapping:
+                        200x300 viewBox
+                        TL: 10,10 -> 5% 3.33%
+                        TR: 190,10 -> 95% 3.33%
+                        NeckR: 105,148 -> 52.5% 49.33%
+                        NeckR_B: 105,152 -> 52.5% 50.66%
+                        BR: 190,290 -> 95% 96.66%
+                        BL: 10,290 -> 5% 96.66%
+                        NeckL_B: 95,152 -> 47.5% 50.66%
+                        NeckL: 95,148 -> 47.5% 49.33%
+                     */}
+                     <div 
+                        className="absolute inset-0 w-full h-full z-10 bg-slate-800/30 backdrop-blur-[2px]"
+                        style={{ 
+                            clipPath: 'polygon(5% 3.33%, 95% 3.33%, 52.5% 49.33%, 52.5% 50.66%, 95% 96.66%, 5% 96.66%, 47.5% 50.66%, 47.5% 49.33%)' 
+                        }}
+                     >
+                        <div className="relative w-full h-full">
+                            {/* Top Half Area */}
+                            <div className="absolute top-0 left-0 w-full h-1/2 overflow-hidden">
+                                {/* Sand A */}
+                                <motion.div 
+                                    initial={false}
+                                    animate={{ 
+                                        height: isBulbATop ? (isFlowing ? "0%" : "100%") : (isFlowing ? "100%" : "0%")
+                                    }}
+                                    transition={{ duration: 5, ease: "linear" }}
+                                    className="w-full bg-indigo-500 absolute left-0"
+                                    style={{
+                                        bottom: isBulbATop ? 0 : 'auto',
+                                        top: isBulbATop ? 'auto' : 0
+                                    }}
+                                />
+                            </div>
+
+                             {/* Stream (Middle) */}
+                             <div 
+                                className={`absolute left-1/2 -translate-x-1/2 w-1 h-1/2 z-20 pointer-events-none overflow-hidden`}
+                                style={{
+                                    top: isBulbATop ? "50%" : "0%"
+                                }}
+                             >
+                                 <AnimatePresence>
+                                     {isFlowing && (
+                                         <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: "100%", opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            className="w-1.5 bg-indigo-400 mx-auto rounded-full absolute"
+                                            style={{
+                                                top: isBulbATop ? 0 : 'auto',
+                                                bottom: !isBulbATop ? 0 : 'auto'
+                                            }}
+                                         />
+                                     )}
+                                 </AnimatePresence>
+                             </div>
+
+                             {/* Bottom Half Area */}
+                             <div className="absolute bottom-0 left-0 w-full h-1/2 overflow-hidden flex items-end">
+                                {/* Sand B */}
+                                <motion.div 
+                                    initial={false}
+                                    animate={{ 
+                                        height: !isBulbATop ? (isFlowing ? "0%" : "100%") : (isFlowing ? "100%" : "0%")
+                                    }}
+                                    transition={{ duration: 5, ease: "linear" }}
+                                    className="w-full bg-indigo-500 absolute left-0"
+                                    style={{
+                                        bottom: isBulbATop ? 0 : 'auto',
+                                        top: isBulbATop ? 'auto' : 0
+                                    }}
+                                />
+                             </div>
+                        </div>
+                     </div>
+                </motion.div>
+            </div>
+
+            <button
+                onClick={handleFlip}
+                className="flex items-center gap-3 px-8 py-4 bg-indigo-600 hover:bg-indigo-500 rounded-full font-bold text-xl transition-all shadow-lg hover:shadow-indigo-500/25 active:scale-95"
+            >
+                <RotateCcw className="w-6 h-6" />
+                Flip Hourglass
+            </button>
+        </div>
+    );
+}
