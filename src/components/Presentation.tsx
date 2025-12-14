@@ -56,6 +56,15 @@ const slides = [
     section: "Decay"
   },
   {
+    id: "solution",
+    title: "RemindED:\nAn AI-Powered Spaced Repetition Algorithm System for Enhanced Knowledge Retention",
+    icon: Target,
+    content: [
+        { type: "image", src: "/logo.png", alt: "RemindED Logo" }
+    ],
+    section: "Solution"
+  },
+  {
     id: "problem",
     title: "The Problem",
     icon: Lightbulb,
@@ -99,13 +108,6 @@ const slides = [
       }
     ],
     section: "SOP"
-  },
-  {
-    id: "solution",
-    title: "RemindED: An AI-Powered Spaced Repetition Algorithm System for Enhanced Knowledge Retention",
-    icon: Target,
-    content: [],
-    section: "Solution"
   },
   {
     id: "framework",
@@ -162,16 +164,6 @@ const slides = [
       }
     ],
     section: "Tech Stack"
-  },
-  {
-    id: "stats",
-    title: "Key Statistics",
-    icon: BarChart3,
-    content: [
-      { type: "quote", value: "\"86% of educational organizations now use generative AI\"", author: "Microsoft, 2025" },
-      { type: "quote", value: "\"Spaced learning results in much better long-term memory compared to cramming\"", author: "Liu et al., 2024" }
-    ],
-    section: "Stats"
   },
   {
     id: "final-chat",
@@ -277,13 +269,26 @@ export default function Presentation() {
             className="w-full max-w-6xl"
           >
             {slides[currentSlide].title && (
-              <div className="mb-8 flex items-center gap-4">
-                <div className="p-3 bg-indigo-500/10 rounded-xl border border-indigo-500/20 text-indigo-400">
-                  <SlideIcon className="w-8 h-8" />
+              <div className="mb-8 flex flex-col items-center gap-4 text-center">
+                {slides[currentSlide].content.find((c: any) => c.type === "image") && (
+                    <div className="mb-4">
+                        <img 
+                            src={(slides[currentSlide].content.find((c: any) => c.type === "image") as any).src} 
+                            alt="Slide Logo" 
+                            className="w-48 h-48 object-contain drop-shadow-2xl"
+                        />
+                    </div>
+                )}
+                <div className="flex items-center gap-4 justify-center">
+                    {!slides[currentSlide].content.find((c: any) => c.type === "image") && (
+                        <div className="p-3 bg-indigo-500/10 rounded-xl border border-indigo-500/20 text-indigo-400">
+                        <SlideIcon className="w-8 h-8" />
+                        </div>
+                    )}
+                    <h1 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-slate-100 to-indigo-200 whitespace-pre-line">
+                    {slides[currentSlide].title}
+                    </h1>
                 </div>
-                <h1 className="text-6xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-slate-100 to-indigo-200">
-                  {slides[currentSlide].title}
-                </h1>
               </div>
             )}
             
@@ -333,6 +338,10 @@ function ContentItem({ item, index }: { item: any; index: number }) {
       transition: { delay: i * 0.1 + 0.3, duration: 0.5 }
     })
   };
+
+  if (item.type === "image") {
+    return null; // Image is handled in the header now
+  }
 
   if (item.type === "text") {
     return (
@@ -567,6 +576,10 @@ function ContentItem({ item, index }: { item: any; index: number }) {
       );
   }
 
+  if (item.type === "sm2-diagram") {
+    return <SM2Diagram />;
+  }
+
   return null;
 }
 
@@ -740,4 +753,125 @@ function HourglassDemo({ item, index }: { item: any, index: number }) {
             </button>
         </div>
     );
+}
+
+function SM2Diagram() {
+  const nodeClass = "bg-slate-800 border border-slate-700 p-4 rounded-xl flex flex-col items-center justify-center text-center shadow-lg relative z-10 backdrop-blur-sm";
+  const labelClass = "text-indigo-400 text-sm font-bold mb-1 uppercase tracking-wider";
+  const valueClass = "text-slate-200 font-medium";
+
+  return (
+    <div className="w-full max-w-4xl mx-auto p-4 relative font-sans text-sm md:text-base mt-4">
+        {/* Level 1: Input */}
+        <div className="flex justify-center mb-12">
+            <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`${nodeClass} w-72 border-indigo-500/50 bg-indigo-500/10`}
+            >
+                <span className={labelClass}>Student Input</span>
+                <span className={valueClass}>Response Time + Accuracy</span>
+            </motion.div>
+        </div>
+
+        {/* Connection Line */}
+        <div className="absolute top-[4.5rem] left-1/2 -translate-x-1/2 h-12 w-0.5 bg-slate-600" />
+
+        {/* Level 2: Calc Q */}
+        <div className="flex justify-center mb-16 relative">
+             <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+                className={`${nodeClass} w-full`}
+            >
+                <span className={labelClass}>Calculate Quality Score (q)</span>
+                <div className="grid grid-cols-4 gap-3 w-full mt-3 text-xs md:text-sm">
+                    <div className="bg-slate-900/50 p-2 rounded border border-red-900/30 flex flex-col gap-1">
+                        <div className="text-red-400 font-bold text-lg">q = 0</div>
+                        <div className="text-slate-400">Incorrect</div>
+                    </div>
+                    <div className="bg-slate-900/50 p-2 rounded border border-yellow-900/30 flex flex-col gap-1">
+                         <div className="text-yellow-400 font-bold text-lg">q = 3</div>
+                         <div className="text-slate-400">Correct ({">"}15s)</div>
+                    </div>
+                     <div className="bg-slate-900/50 p-2 rounded border border-blue-900/30 flex flex-col gap-1">
+                         <div className="text-blue-400 font-bold text-lg">q = 4</div>
+                         <div className="text-slate-400">Correct (8-15s)</div>
+                    </div>
+                     <div className="bg-slate-900/50 p-2 rounded border border-green-900/30 flex flex-col gap-1">
+                         <div className="text-green-400 font-bold text-lg">q = 5</div>
+                         <div className="text-slate-400">Correct ({"<"}8s)</div>
+                    </div>
+                </div>
+            </motion.div>
+        </div>
+
+        {/* Level 3: Branching */}
+        <div className="grid grid-cols-2 gap-8 relative">
+             {/* Connector Lines (SVG) */}
+             <svg className="absolute -top-16 left-0 w-full h-16 pointer-events-none" style={{ zIndex: 0 }}>
+                 <path d="M 50% 0 L 50% 50% L 25% 50% L 25% 100%" fill="none" stroke="#475569" strokeWidth="2" />
+                 <path d="M 50% 50% L 75% 50% L 75% 100%" fill="none" stroke="#475569" strokeWidth="2" />
+             </svg>
+
+             {/* Left Branch: Incorrect */}
+             <div className="flex flex-col items-center">
+                <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className={`${nodeClass} w-full max-w-xs border-red-500/30 bg-red-500/5 mb-8`}
+                >
+                    <span className="text-red-400 font-bold mb-2 block border-b border-red-500/20 pb-1 w-full">Incorrect (q &lt; 3)</span>
+                    <div className="text-slate-300 text-sm space-y-1">
+                        <div className="flex justify-between w-full"><span>Streak (n)</span> <span className="text-white font-mono">Reset to 0</span></div>
+                        <div className="flex justify-between w-full"><span>Interval (I)</span> <span className="text-white font-mono">1 Day</span></div>
+                    </div>
+                </motion.div>
+             </div>
+
+             {/* Right Branch: Correct */}
+             <div className="flex flex-col items-center">
+                 <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className={`${nodeClass} w-full max-w-xs border-green-500/30 bg-green-500/5 mb-8`}
+                >
+                    <span className="text-green-400 font-bold mb-2 block border-b border-green-500/20 pb-1 w-full">Correct (q &ge; 3)</span>
+                    <div className="text-slate-300 text-sm space-y-1">
+                        <div className="flex justify-between w-full"><span>Streak (n)</span> <span className="text-white font-mono">Increment (+1)</span></div>
+                        <div className="flex justify-between w-full"><span>Easiness (EF)</span> <span className="text-white font-mono">Update</span></div>
+                    </div>
+                </motion.div>
+
+                {/* Arrow to Mastery */}
+                <div className="h-8 w-0.5 bg-slate-600 mb-2"></div>
+
+                {/* Mastery Check */}
+                 <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 }}
+                    className={`${nodeClass} w-full max-w-xs border-yellow-500/30 bg-yellow-500/5`}
+                >
+                    <span className="text-yellow-400 font-bold mb-3">Is Streak (n) &gt; 3?</span>
+                     <div className="grid grid-cols-2 gap-4 w-full">
+                        <div className="bg-green-900/20 border border-green-500/30 p-2 rounded">
+                            <div className="text-green-400 text-xs font-bold mb-1">YES</div>
+                            <div className="text-slate-200 text-xs">Mastered</div>
+                            <div className="text-slate-500 text-[10px]">(Remove)</div>
+                        </div>
+                        <div className="bg-blue-900/20 border border-blue-500/30 p-2 rounded">
+                            <div className="text-blue-400 text-xs font-bold mb-1">NO</div>
+                            <div className="text-slate-200 text-xs">Schedule</div>
+                            <div className="text-slate-500 text-[10px]">(Wait Interval)</div>
+                        </div>
+                     </div>
+                </motion.div>
+             </div>
+        </div>
+    </div>
+  );
 }
