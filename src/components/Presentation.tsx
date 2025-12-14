@@ -76,18 +76,18 @@ const slides = [
             {
                 url: "Research Paper › Chapter 1 › Problem",
                 title: "The Forgetting Curve: Why We Lose 90% of Information",
-                snippet: "Core Issue: Research confirms that students forget 90% of new info within a week (Ebbinghaus Forgetting Curve). This natural memory decay is the primary barrier to long-term retention.",
+                snippet: "Students forget 90% of new info within a week (Ebbinghaus Forgetting Curve). This natural memory decay is the primary barrier to long-term retention.",
                 link: "https://docs.google.com/document/d/1htE4dMxS90M-K8h0B6eu9Sh4RhJScEGHewqKgGZWYpE/edit?tab=t.0#bookmark=id.bbvh1iadhab"
             },
             {
                 url: "Research Paper › Chapter 1 › Background",
-                title: " The Flaws of Passive Learning",
-                snippet: "the act of retrieving information from memory strengthens neural pathways more effectively than passive review. This mechanism, known as Active Recall, shifts the student’s role from a passive consumer of information to an active participant.",
-                link: "https://docs.google.com/document/d/1htE4dMxS90M-K8h0B6eu9Sh4RhJScEGHewqKgGZWYpE/edit?tab=t.0#bookmark=id.ppyouwb829xn"
+                title: "The Ebbinghaus Forgetting Curve: We Forget 70% in 24 Hours",
+                snippet: " A concept from psychology called the Ebbinghaus Forgetting Curve, shows that our memory of new information drops sharply unless we make an effort to review it. Without reviewing, we can forget as much as 70% of what we have learned within 24 hours (Eval-Learn, 2025).",
+                link: "https://docs.google.com/document/d/11-u0sawStH8RzY6nao2lJ6B3OYOGfV_1PoVqxs_doFk/edit?tab=t.0#bookmark=id.uh71uelp6hbv"
             }
         ],
         related: [
-            "How to improve memory retention in students",
+            "SDG 4: Quality Education",
             "Active recall vs passive review"
         ]
       }
