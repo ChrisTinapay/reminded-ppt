@@ -162,7 +162,7 @@ const slides = [
               title: "AI-Powered Content Generation",
               icon: Code,
               items: [
-                { title: "Semantic AI Pipeline", desc: "Engine: Google Gemini 2.5 Flash. Strategy: Long-Context Inference for whole-document coherence." },
+                { title: "Semantic LLM Pipeline", desc: "Engine: Google Gemini 2.5 Flash. Strategy: Long-Context Inference for whole-document coherence." },
                 { title: "Pedagogical Constraint", desc: "\"Atomic Knowledge\" principle: Brief stems (<20 words). Varied cognitive complexity via Bloom’s Taxonomy." },
                 { title: "Structured Output", desc: "Strict JSON Schema enforcement for predictable frontend rendering." }
               ]
