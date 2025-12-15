@@ -20,6 +20,7 @@ import {
   Hourglass,
   RotateCcw
 } from "lucide-react";
+import { desc } from "framer-motion/client";
 
 // --- Data ---
 
@@ -153,8 +154,9 @@ const slides = [
               title: "The Learning Engine (Modified SM-2)",
               icon: Brain,
               items: [
+                { title: "Factors", desc: "Easiness Factor (EF), Quality Score (q), Interval (I), Repetition Count (n)"},
                 { title: "Automated Quality Score (q)", desc: "Objective calculation based on Accuracy + Response Time. Eliminates subjective user bias." },
-                { title: "Optimized Repetition Density", desc: "Compressed second interval parameter (I₂ = 3 days). Accelerates initial reinforcement curve." },
+                { title: "Optimized Parameter", desc: "Compressed second interval parameter (I₂ = 3 days). Accelerates initial reinforcement curve." },
                 { title: "Mastery Threshold", desc: "Implemented exit condition (n > 3 successful recalls). Manages cognitive load by retiring mastered items." }
               ]
             },
