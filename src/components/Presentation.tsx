@@ -66,7 +66,7 @@ const slides = [
   },
   {
     id: "problem",
-    title: "The Problem",
+    title: "Why This Study?",
     icon: Lightbulb,
     content: [
       {
@@ -109,20 +109,8 @@ const slides = [
     ],
     section: "SOP"
   },
-  {
-    id: "framework",
-    title: "Theoretical Framework",
-    icon: BookOpen,
-    content: [
-      { type: "point", label: "Ebbinghaus Forgetting Curve & Spacing Effect", value: "Justifies when to review." },
-      { type: "point", label: "Bloom's Taxonomy", value: "Justifies the structure of the questions (recall to analysis)." },
-      { type: "point", label: "Adaptive Learning Theory", value: "Justifies the personalization." },
-      { type: "point", label: "Technology Acceptance Model (TAM)", value: "Justifies evaluation metrics (Ease of Use, Usefulness)." }
-    ],
-    section: "Framework"
-  },
-  {
-    id: "methodology",
+    {
+      id: "methodology",
     title: "Methodology",
     icon: GraduationCap,
     content: [
@@ -151,10 +139,50 @@ const slides = [
       },
       
     ],
-    section: "Methodology"
-  },
-  {
-    id: "stack",
+      section: "Methodology"
+    },
+    {
+      id: "architecture",
+      title: "Developmental Phase:\nCore Architectures & Features",
+      icon: Code,
+      content: [
+        {
+          type: "architecture-grid",
+          columns: [
+            {
+              title: "The Learning Engine (Modified SM-2)",
+              icon: Brain,
+              items: [
+                { title: "Automated Quality Score (q)", desc: "Objective calculation based on Accuracy + Response Time. Eliminates subjective user bias." },
+                { title: "Optimized Repetition Density", desc: "Compressed second interval parameter (I₂ = 3 days). Accelerates initial reinforcement curve." },
+                { title: "Mastery Threshold", desc: "Implemented exit condition (n > 3 successful recalls). Manages cognitive load by retiring mastered items." }
+              ]
+            },
+            {
+              title: "AI-Powered Content Generation",
+              icon: Code,
+              items: [
+                { title: "Semantic AI Pipeline", desc: "Engine: Google Gemini 2.5 Flash. Strategy: Long-Context Inference for whole-document coherence." },
+                { title: "Pedagogical Constraint", desc: "\"Atomic Knowledge\" principle: Brief stems (<20 words). Varied cognitive complexity via Bloom’s Taxonomy." },
+                { title: "Structured Output", desc: "Strict JSON Schema enforcement for predictable frontend rendering." }
+              ]
+            },
+            {
+              title: "Key System Features (RemindED)",
+              icon: Target,
+              items: [
+                { title: "Automated Material Conversion", desc: "Instant transformation from passive PDFs to active, structured quizzes." },
+                { title: "Adaptive Scheduling", desc: "Hyper-personalized Intervals (I) based on individual forgetting curves." },
+                { title: "Gamified Rapid-Fire Review", desc: "Time-pressured interface leveraging the \"hesitation threshold.\"" }
+              ]
+            }
+          ]
+        }
+      ],
+      section: "Architecture"
+    },
+    {
+      id: "stack",
     title: "Technical Stack",
     icon: Code,
     content: [
@@ -332,6 +360,47 @@ export default function Presentation() {
   );
 }
 
+function ArchitectureGrid({ columns }: { columns: any[] }) {
+    return (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+            {columns.map((col: any, idx: number) => {
+                const Icon = col.icon;
+                return (
+                    <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: idx * 0.2 }}
+                        className="bg-slate-900/50 rounded-xl border border-slate-700/50 overflow-hidden flex flex-col h-full"
+                    >
+                        {/* Header */}
+                        <div className="bg-slate-800 p-6 border-b border-slate-700 flex items-center gap-4">
+                            <div className="p-3 rounded-lg bg-indigo-500/20 text-indigo-400">
+                                <Icon className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-xl font-bold text-slate-100 leading-tight">{col.title}</h3>
+                        </div>
+
+                        {/* Content */}
+                        <div className="p-6 flex-1 space-y-6">
+                            {col.items.map((item: any, i: number) => (
+                                <div key={i} className="group">
+                                    <h4 className="text-indigo-300 font-bold text-lg mb-1 group-hover:text-indigo-200 transition-colors">
+                                        {item.title}
+                                    </h4>
+                                    <p className="text-slate-400 text-sm leading-relaxed">
+                                        {item.desc}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                );
+            })}
+        </div>
+    );
+}
+
 function ContentItem({ item, index }: { item: any; index: number }) {
   const variants = {
     hidden: { opacity: 0, y: 20 },
@@ -341,6 +410,10 @@ function ContentItem({ item, index }: { item: any; index: number }) {
       transition: { delay: i * 0.1 + 0.3, duration: 0.5 }
     })
   };
+
+  if (item.type === "architecture-grid") {
+      return <ArchitectureGrid columns={item.columns} />;
+  }
 
   if (item.type === "image") {
     return null; // Image is handled in the header now
